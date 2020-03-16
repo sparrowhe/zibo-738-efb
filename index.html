@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.3/css/mdui.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="js/efb.js"></script>
     <style>
         .remove {
             display: none;
@@ -47,34 +48,6 @@
         <a onclick="show(9)" class="mdui-ripple mdui-color-theme">关车检查单</a>
         <a onclick="show(0)" class="mdui-ripple mdui-color-theme">离机检查单</a>
     </div>
-    <script>
-        function show(n) {
-            var name = ["beforeFlight.html", "beforeStart.html", "beforeTaxi.html", "beforeTakeoff.html",
-                "afterTakeoff.html", "descend.html", "approach.html", "landing.html", "cutoff.html", ""
-            ]
-            $.ajax({
-                url: "checklist/" + name[n - 1],
-                success: function (result) {
-                    $("#card").html(result)
-                }
-            })
-        }
-
-        function erc() {
-            $.ajax({
-                url: "erc.html",
-                success: function (result) {
-                    $("#card").html(result)
-                    $("#foot").addClass("remove")
-                }
-            })
-        }
-
-        function qrh() {
-            $("#foot").removeClass("remove")
-            show(1)
-        }
-    </script>
 </body>
 
 </html>

@@ -1,3 +1,4 @@
+<script src="js/efb.js"></script>
 <div class="mdui-card-primary">
     <div class="mdui-card-primary-title mdui-text-center" id="Title">ENR 6.</div>
     <div class="mdui-card-primary-subtitle mdui-text-center" id="Subtitle">航路图 EN-ROUTE CHART</div>
@@ -45,17 +46,3 @@
     <button onclick="erc()" class="mdui-btn mdui-btn-raised">Close</button>
     <br><br>
 </div>
-<script>
-    function upd(n) {
-        url = "https://wiki.sinofsx.com/Charts/ENR/ENR_ERC" + n + ".pdf";
-        html=$("#2").html();
-        $("#2").html('<iframe style="height:100%;width:100%;" src="' + url + '">' +'</iframe>' + html);
-        $("#1").addClass("remove");
-        $("#2").removeClass("remove");
-    }
-
-    function close() {
-        $("#2").addClass("remove");
-        $("#1").removeClass("remove");
-    }
-</script>
