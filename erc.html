@@ -1,0 +1,61 @@
+<div class="mdui-card-primary">
+    <div class="mdui-card-primary-title mdui-text-center" id="Title">ENR 6.</div>
+    <div class="mdui-card-primary-subtitle mdui-text-center" id="Subtitle">航路图 EN-ROUTE CHART</div>
+</div>
+
+<div class="mdui-card-content" id="1">
+    <img class="mdui-img-fluid mdui-center"
+        src="https://wiki.sinofsx.com/images/f/fd/%E8%88%AA%E8%B7%AF%E5%9B%BE%E4%BB%A3%E7%A0%81.jpeg" />
+    <br>
+    <div class="mdui-center">
+        <table class="mdui-table">
+            <thead>
+                <tr>
+                    <th>ENR6.</th>
+                    <th>版本号</th>
+                    <th>Preview/Download</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ERC1</td>
+                    <td>2020 Nr.03</td>
+                    <td><button onclick="upd(1)" class="mdui-btn mdui-btn-raised">Preview</button></td>
+                </tr>
+                <tr>
+                    <td>ERC2</td>
+                    <td>2020 Nr.03</td>
+                    <td><button onclick="upd(2)" class="mdui-btn mdui-btn-raised">Preview</button></td>
+                </tr>
+                <tr>
+                    <td>ERC3</td>
+                    <td>2020 Nr.03</td>
+                    <td><button onclick="upd(3)" class="mdui-btn mdui-btn-raised">Preview</button></td>
+                </tr>
+                <tr>
+                    <td>ERC4</td>
+                    <td>2020 Nr.03</td>
+                    <td><button onclick="upd(4)" class="mdui-btn mdui-btn-raised">Preview</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="mdui-card-content remove" id="2">
+    <button onclick="erc()" class="mdui-btn mdui-btn-raised">Close</button>
+    <br><br>
+</div>
+<script>
+    function upd(n) {
+        url = "https://wiki.sinofsx.com/Charts/ENR/ENR_ERC" + n + ".pdf";
+        html=$("#2").html();
+        $("#2").html('<iframe style="height:100%;width:100%;" src="' + url + '">' +'</iframe>' + html);
+        $("#1").addClass("remove");
+        $("#2").removeClass("remove");
+    }
+
+    function close() {
+        $("#2").addClass("remove");
+        $("#1").removeClass("remove");
+    }
+</script>
