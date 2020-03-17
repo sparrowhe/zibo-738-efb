@@ -1,6 +1,6 @@
 function show(n) {
     var name = ["beforeFlight.html", "beforeStart.html", "beforeTaxi.html", "beforeTakeoff.html",
-        "afterTakeoff.html", "descend.html", "approach.html", "landing.html", "cutoff.html", ""
+        "afterTakeoff.html", "descend.html", "approach.html", "landing.html", "cutoff.html", "leave.html"
     ]
     $.ajax({
         url: "checklist/" + name[n - 1],
