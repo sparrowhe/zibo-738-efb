@@ -25,7 +25,7 @@ function qrh() {
     show(1)
 }
 function upd(n) {
-    url = "http://wiki.sinofsx.com/Charts/ENR/ENR_ERC" + n + ".pdf";
+    url = "https://wiki.sinofsx.com/Charts/ENR/ENR_ERC" + n + ".pdf";
     targeturl = "pdfjs/web/viewer.html?file=" + url;
     html=$("#2").html();
     $("#2").html('<object style="height:100%;width:100%;" data="'+targeturl+'">' +'</object>' + html);
