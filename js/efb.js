@@ -46,6 +46,17 @@ function getW() {
     getMetar(icao)
 }
 
+function PrefixInteger(num, length) {
+    return (Array(length).join('0') + num).slice(-length);
+}
+window.onload = setInterval(function updTime() {
+
+    var time = "UTC "
+    var d = new Date()
+    time += PrefixInteger(d.getUTCHours().toString(),2) + PrefixInteger(d.getUTCMinutes().toString(),2) + " Z"
+    $("#time").html(time)
+}, 1000)
+
 function upd(n) {
     url = "https%3a%2f%2fdry-snow-1529.awwman.workers.dev%2fcorsproxy%2f%3f1%3d1%26apiurl%3dhttps%3a%2f%2fwiki.sinofsx.com%2fCharts%2fENR%2fENR_ERC" + n + ".pdf";
     targeturl = "pdfjs/web/viewer.html?file=" + url;
