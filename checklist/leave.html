@@ -1,30 +1,30 @@
 <div class="mdui-card-primary">
-    <div class="mdui-card-primary-title mdui-text-center" id="Title">着陆检查单</div>
-    <div class="mdui-card-primary-subtitle mdui-text-center" id="Subtitle">Landing Checklist</div>
+    <div class="mdui-card-primary-title mdui-text-center" id="Title">离机检查单</div>
+    <div class="mdui-card-primary-subtitle mdui-text-center" id="Subtitle">Leave Checklist</div>
   </div>
 
-  <div class="mdui-card-content" id="Subtitle">
+  <div class="mdui-card-content" id="Subtitle" onclick="save('leave')">
     <label class="mdui-checkbox">
         惯导方式选择器.............................................关闭
-        <input type="checkbox"/>
+        <input type="checkbox" class="leave" id="0"/>
         <i class="mdui-checkbox-icon"></i>
     </label>
     <br>
     <label class="mdui-checkbox">
         紧急出口灯.....................................................关闭
-        <input type="checkbox"/>
+        <input type="checkbox" class="leave" id="1"/>
         <i class="mdui-checkbox-icon"></i>
     </label>
     <br>
     <label class="mdui-checkbox">
         窗加温.............................................................关
-        <input type="checkbox"/>
+        <input type="checkbox" class="leave" id="2"/>
         <i class="mdui-checkbox-icon"></i>
     </label>
     <br>
     <label class="mdui-checkbox">
         空调组件.........................................................关
-        <input type="checkbox"/>
+        <input type="checkbox" class="leave" id="3"/>
         <i class="mdui-checkbox-icon"></i>
     </label>
   </div>

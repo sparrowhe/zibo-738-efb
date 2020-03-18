@@ -7,6 +7,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="js/efb.js"></script>
+    <script src="js/checklist.js"></script>
+    <script src="js/getMetar.js"></script>
     <style>
         .remove {
             display: none;
@@ -18,11 +20,14 @@
     <div class="mdui-appbar mdui-appbar-fixed">
         <div class="mdui-toolbar mdui-color-theme">
             <a class="mdui-typo-title">Zibo738 电子飞行包</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <div class="mdui-typo-title mdui-text-right" id="time">UTC XXYY Z</div>
         </div>
         <div class="mdui-tab mdui-color-theme" mdui-tab>
             <a onclick="qrh()" class="mdui-ripple mdui-ripple-white">快速检查单</a>
             <a href="eaip.html" class="mdui-ripple mdui-ripple-white">航行资料</a>
             <a onclick="erc()" class="mdui-ripple mdui-ripple-white">航路图</a>
+            <a onclick="weather()" class="mdui-ripple mdui-ripple-white">天气</a>
         </div>
     </div>
     <div class="mdui-card mdui-center" style="margin-top: 50px; width: auto; max-width: 800px;" id="card">
