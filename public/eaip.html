@@ -1,0 +1,17 @@
+<h>function upd(n) {
+    turl = "https://wiki.sinofsx.com/Charts/ENR/ENR_ERC" + n + ".pdf";
+    targeturl = "pdfjs/web/viewer.html?file=../files/temp.pdf";
+    html = $("#2").html();
+    $.ajax({
+        url: "/downloadpdf",
+        data: {url:turl},
+        type: "GET",
+        success: function(result) {
+            console.log(result);
+            $("#2").html('<object style="height:100%;width:100%;" data="' + targeturl + '">' + '</object>' + html);
+            $("#1").addClass("remove");
+            $("#2").removeClass("remove");
+        }
+    })
+}
+</h>

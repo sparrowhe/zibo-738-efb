@@ -1,0 +1,26 @@
+{
+  "name": "zibo-738-efb",
+  "version": "1.0.0",
+  "description": "A EFB for zibo-738. No real-life flights using.",
+  "main": "index.js",
+  "scripts": {
+    "test": "console.log('Hello zibo-738')"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eureka0225/zibo-738-efb.git"
+  },
+  "author": "Eureka0225",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/Eureka0225/zibo-738-efb/issues"
+  },
+  "homepage": "https://github.com/Eureka0225/zibo-738-efb#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "download": "^7.1.0",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "os": "^0.1.1"
+  }
+}

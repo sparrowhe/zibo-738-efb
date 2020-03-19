@@ -1,0 +1,13 @@
+  axios.get('http://www.avt7.com/Home/AirportMetarInfo', {
+    params: {
+      airport4Code: req.query.icao
+    }
+  })
+  .then(function (response) {
+    mater = JSON.parse(JSON.stringify(response))
+    console.log(mater);
+    res.send(mater);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
