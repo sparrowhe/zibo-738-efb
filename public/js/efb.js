@@ -59,19 +59,12 @@ window.onload = setInterval(function updTime() {
 
 function upd(n) {
     turl = "https://wiki.sinofsx.com/Charts/ENR/ENR_ERC" + n + ".pdf";
-    targeturl = "pdfjs/web/viewer.html?file=../files/temp.pdf";
+    targeturl = "/downloadpdf?url="+turl;
     html = $("#2").html();
-    $.ajax({
-        url: "/downloadpdf",
-        data: {url:turl},
-        type: "GET",
-        success: function(result){ if(result=="ok"){
-            console.log(result);
-            $("#2").html('<object style="height:100%;width:100%;" data="' + targeturl + '">' + '</object>' + html);
-            $("#1").addClass("remove");
-            $("#2").removeClass("remove");
-        }}
-    })
+    $("#2").html('<object style="height:100%;width:100%;" data="' + targeturl + '">' + '</object>' + html);
+    $("#1").addClass("remove");
+    $("#2").removeClass("remove");
+    
 }
 
 function close() {

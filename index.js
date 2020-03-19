@@ -4,7 +4,6 @@ const fs = require('fs')
 const download = require('download')
 const axios = require('axios')
 const app = express()
-
 var os=require('os'),iptable={},
     ifaces=os.networkInterfaces();
     for (var dev in ifaces) {
@@ -19,7 +18,7 @@ var os=require('os'),iptable={},
   function downloadpdf(targetiurl) {
   download(targetiurl).then(data => {
 //    fs.unlinkSync('files/temp.pdf')
-    fs.writeFileSync('public/pdfjs/files/temp.pdf', data);
+    fs.writeFileSync('public/files/temp.pdf', data);
 });
 }
 
@@ -35,7 +34,7 @@ app.all('*', function(req, res, next) {
 app.get('/downloadpdf',function(req,res){
   var result = req.query.url;
     downloadpdf(result)
-    res.send("ok") //返回数据
+    res.sendFile(path.join(__dirname,"./public/files/temp.pdf")) //返回数据
     console.log("已下载所要求的PDF，", result)
 });
 app.get('/getmater',function(req,res){
