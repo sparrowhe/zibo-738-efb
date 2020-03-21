@@ -1,17 +1,15 @@
-<h>function upd(n) {
-    turl = "https://wiki.sinofsx.com/Charts/ENR/ENR_ERC" + n + ".pdf";
-    targeturl = "pdfjs/web/viewer.html?file=../files/temp.pdf";
-    html = $("#2").html();
-    $.ajax({
-        url: "/downloadpdf",
-        data: {url:turl},
-        type: "GET",
-        success: function(result) {
-            console.log(result);
-            $("#2").html('<object style="height:100%;width:100%;" data="' + targeturl + '">' + '</object>' + html);
-            $("#1").addClass("remove");
-            $("#2").removeClass("remove");
-        }
-    })
-}
-</h>
+<div class="mdui-card-primary">
+    <div class="mdui-card-primary-title mdui-text-center" id="Title">航行资料</div>
+    <div class="mdui-card-primary-subtitle mdui-text-center" id="Subtitle">内容来自SINO公开wiki</div>
+</div>
+
+<div class="mdui-card-content">
+    <div class="mdui-textfield.mdui-typo">
+        <div class="mdui-text-center">为确保时效性，我们需要从SINO wiki爬取相关内容。</div>
+    </div>
+    <br>
+    <bottom class="mdui-btn-raised mdui-btn">开始</bottom>
+    <br>
+    <div id="eaip">
+    </div>
+</div>

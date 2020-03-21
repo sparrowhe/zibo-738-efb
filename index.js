@@ -18,10 +18,9 @@ var os=require('os'),iptable={},
   function downloadpdf(targetiurl) {
   download(targetiurl).then(data => {
 //    fs.unlinkSync('files/temp.pdf')
-    fs.writeFileSync('public/files/temp.pdf', data);
+    fs.writeFileSync('public/pdfjs/files/temp.pdf', data);
 });
 }
-
 app.use(express.static(path.join(__dirname, 'public')))
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -34,7 +33,7 @@ app.all('*', function(req, res, next) {
 app.get('/downloadpdf',function(req,res){
   var result = req.query.url;
     downloadpdf(result)
-    res.sendFile(path.join(__dirname,"./public/files/temp.pdf")) //返回数据
+    res.send({"message":"ok"}) //返回数据
     console.log("已下载所要求的PDF，", result)
 });
 app.get('/getmater',function(req,res){
@@ -44,6 +43,20 @@ app.get('/getmater',function(req,res){
     res.send(data);
     });
 });
+app.get('/eaipget',function(req,res){
+  if(req.query.command == 'check'){
+    fs.exists("public/files/sinoeaip/info.json",function(exists){
+        if(exists){
+         res.send({"message":"found"}) //返回数据
+        }
+        if(!exists){
+         console.log("info文件不存在，进入初始化")
+         res.send({"message":"notfound"})
+           }
+        })
+  }
+    res.send(data);
+    });
 var server = app.listen(8025, function () {
   console.log("监听已启动，访问地址 http://<IP地址>:8025")
   console.log("请从上列IP中选择正确的IP地址访问。一般包含“以太网”，“Wireless”，“本地连接”等字样的是正确的网卡")

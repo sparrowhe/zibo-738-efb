@@ -59,16 +59,49 @@ window.onload = setInterval(function updTime() {
 
 function upd(n) {
     turl = "https://wiki.sinofsx.com/Charts/ENR/ENR_ERC" + n + ".pdf";
-    targeturl = "/downloadpdf?url="+turl;
+    targeturl = "pdfjs/web/viewer.html?file=../files/temp.pdf";
     html = $("#2").html();
-    $("#2").html('<object style="height:100%;width:100%;" data="' + targeturl + '">' + '</object>' + html);
-    $("#1").addClass("remove");
-    $("#2").removeClass("remove");
-    
+    $.ajax({
+        url: "/downloadpdf",
+        data: {url:turl},
+        type: "GET",
+        success: function(result){ 
+            var dete = JSON.parse(JSON.stringify(result));
+            var tede = dete['message'];
+            if(tede=="ok"){
+            console.log(result);
+            $("#2").html('<object style="height:100%;width:100%;" data="' + targeturl + '">' + '</object>' + html);
+            $("#1").addClass("remove");
+            $("#2").removeClass("remove");
+        }}
+    })
 }
 
 function close() {
     $("#2").addClass("remove");
     $("#1").removeClass("remove");
+}
+
+function eaip() {
+    $.ajax({
+        url: "eaip.html",
+        success: function (result) {
+            $("#card").html(result);
+            $.ajax({
+                url: "/eaipget",
+                data: {command:"check"},
+                type: "GET",
+                success: function(result){ 
+                    var dete2 = JSON.parse(JSON.stringify(result));
+                    var tede2 = dete2['message'];
+                    if(tede2=="ok"){
+                    console.log(result);
+                    $("#2").html('<object style="height:100%;width:100%;" data="' + targeturl + '">' + '</object>' + html);
+                    $("#1").addClass("remove");
+                    $("#2").removeClass("remove");
+                }}
+            })
+        }
+    })
 }
 
