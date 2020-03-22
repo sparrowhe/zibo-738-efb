@@ -1,15 +1,21 @@
 <div class="mdui-card-primary">
     <div class="mdui-card-primary-title mdui-text-center" id="Title">航行资料</div>
-    <div class="mdui-card-primary-subtitle mdui-text-center" id="Subtitle">内容来自SINO公开wiki</div>
+    <div class="mdui-card-primary-subtitle mdui-text-center" id="Subtitle">内容来自SINO公开wiki，此处提供机场资料</div>
 </div>
 
 <div class="mdui-card-content">
     <div class="mdui-textfield.mdui-typo">
-        <div class="mdui-text-center">为确保时效性，我们需要从SINO wiki爬取相关内容。</div>
+        <div class="mdui-text-center" id="status">
+    </div>
     </div>
     <br>
-    <bottom class="mdui-btn-raised mdui-btn">开始</bottom>
+    <botton class="mdui-btn-raised mdui-btn" onclick="updateeaip()" mdui-dialog="{target: '#updatesdia',modal:'true',closeOnEsc:'false'}">更新eAIP</botton>
     <br>
-    <div id="eaip">
+    <div id="eaipk">
+        <div class="mdui-dialog" id="updatesdia">
+            <div class="mdui-dialog-title">更新eAIP</div>
+            <div class="mdui-dialog-content" id="updates">正在联系本地NodeJS服务器...</div>
+            <div class="mdui-dialog-actions" onclick="cancleupdate()"><button class="mdui-btn mdui-ripple" mdui-dialog-cancel>关闭</button></div>
+          </div>
     </div>
 </div>

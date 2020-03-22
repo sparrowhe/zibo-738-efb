@@ -59,7 +59,7 @@ window.onload = setInterval(function updTime() {
 
 function upd(n) {
     turl = "https://wiki.sinofsx.com/Charts/ENR/ENR_ERC" + n + ".pdf";
-    targeturl = "pdfjs/web/viewer.html?file=../files/temp.pdf";
+    targeturl = "pdfjs/web/viewer.html?file=../files/ENR_ERC" + n + ".pdf";
     html = $("#2").html();
     $.ajax({
         url: "/downloadpdf",
@@ -94,14 +94,32 @@ function eaip() {
                 success: function(result){ 
                     var dete2 = JSON.parse(JSON.stringify(result));
                     var tede2 = dete2['message'];
-                    if(tede2=="ok"){
+                    if(tede2=="notfound"){
                     console.log(result);
-                    $("#2").html('<object style="height:100%;width:100%;" data="' + targeturl + '">' + '</object>' + html);
-                    $("#1").addClass("remove");
-                    $("#2").removeClass("remove");
-                }}
+                    $("#status").load("js/eaipcon/notfound.html");
+                }
+            }
             })
         }
     })
 }
 
+function updateeaip(){
+    $.ajax({
+        url: "/eaipget",
+        data: {command:"update"},
+        type: "GET",
+        success: function(result){ 
+            if (lastm==result) {
+            } else {
+                lastm = result;
+                var dete2 = JSON.parse(JSON.stringify(result));
+                var tede2 = dete2['message'];
+                $("#updates").append('<div class="mdui-dialog-content" id="updates">'+tede2+'</div>')
+                if (tede2=='done') {
+                    clearInterval(idxx);
+                  }
+            }
+        }
+    })
+    }

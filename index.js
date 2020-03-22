@@ -3,6 +3,7 @@ const path = require('path')
 const fs = require('fs')
 const download = require('download')
 const axios = require('axios')
+const cheerio = require('cheerio')
 const app = express()
 var os=require('os'),iptable={},
     ifaces=os.networkInterfaces();
@@ -15,12 +16,6 @@ var os=require('os'),iptable={},
                       }
                       console.log(iptable);
 
-  function downloadpdf(targetiurl) {
-  download(targetiurl).then(data => {
-//    fs.unlinkSync('files/temp.pdf')
-    fs.writeFileSync('public/pdfjs/files/temp.pdf', data);
-});
-}
 app.use(express.static(path.join(__dirname, 'public')))
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -32,30 +27,55 @@ app.all('*', function(req, res, next) {
 });
 app.get('/downloadpdf',function(req,res){
   var result = req.query.url;
-    downloadpdf(result)
-    res.send({"message":"ok"}) //返回数据
+  download(result, "public/pdfjs/files").then(data => {
+    res.status(200).send({"message":"ok"}) //返回数据
     console.log("已下载所要求的PDF，", result)
+  });
 });
 app.get('/getmater',function(req,res){
   targeiurl = 'http://www.avt7.com/Home/AirportMetarInfo?airport4Code=' + req.query.icao;
   download(targeiurl).then(data => {
     console.log("已获取MATER of" , req.query.icao);
-    res.send(data);
+    res.status(200).send(data);
     });
 });
 app.get('/eaipget',function(req,res){
   if(req.query.command == 'check'){
     fs.exists("public/files/sinoeaip/info.json",function(exists){
         if(exists){
-         res.send({"message":"found"}) //返回数据
+        console.log("eAIP info已找到")
+        var eaipinfo = fs.readFileSync("public/files/sinoeaip/info.json",)
+         res.status(200).send(eaipinfo) //返回数据
         }
         if(!exists){
-         console.log("info文件不存在，进入初始化")
-         res.send({"message":"notfound"})
+         console.log("eAIP info文件不存在，进入初始化")
+         res.status(200).send({"message":"notfound"})
            }
         })
   }
-    res.send(data);
+  if(req.query.command == 'update'){
+    res.status(200).send({"message":"working"})
+    download("https://wiki.sinofsx.com/index.php?title=AD_2._%E6%9C%BA%E5%9C%BA_AERODROMES").then(data => {
+      console.log("已抓取到SINO WIKI");
+      eaipstatus = {"message":"已抓取到SINO云课堂HTML"}
+      $ = cheerio.load(data);
+      var links = new Array();
+      $('a[class="external text"]').each(function(){
+      link = $(this).attr("href");
+      links.push(link);
+    })
+      console.log(links);
+      eaipstatus = {"message":"已抓取eAIP下载链接，开始下载"}
+      Promise.all(links.map(x => download(x, 'public/pdfjs/files/eaip'))).then(() => {
+        console.log('全部PDF下载完毕kksk');
+    });
+    console.log('全部PDF下载完毕');
+    eaipstatus = {"message":"done"}
+      });
+  }
+    });
+app.get('/updatestatus',function(req,res){
+        res.status(200).send(eaipstatus) //返回数据
     });
 var server = app.listen(8025, function () {
   console.log("监听已启动，访问地址 http://<IP地址>:8025")
@@ -63,4 +83,4 @@ var server = app.listen(8025, function () {
 })
 
 
-
+// PDF下载完毕指示，前端显示
