@@ -1,21 +1,47 @@
-<div class="mdui-card-primary">
+<div class="mdui-card-primary">   
+     <botton class="mdui-btn-raised mdui-btn" onclick="jump()">前往SINO云课堂</botton>
     <div class="mdui-card-primary-title mdui-text-center" id="Title">航行资料</div>
-    <div class="mdui-card-primary-subtitle mdui-text-center" id="Subtitle">内容来自SINO公开wiki，此处提供机场资料</div>
+    <div class="mdui-card-primary-subtitle mdui-text-center" id="Subtitle">支持本地与从SINO加载</div>
 </div>
 
 <div class="mdui-card-content">
+    <div id="main">
     <div class="mdui-textfield.mdui-typo">
         <div class="mdui-text-center" id="status">
     </div>
     </div>
-    <br>
-    <botton class="mdui-btn-raised mdui-btn" onclick="updateeaip()" mdui-dialog="{target: '#updatesdia',modal:'true',closeOnEsc:'false'}">更新eAIP</botton>
-    <br>
+    <br><div class="mdui-text-center">
+    <botton class="mdui-btn mdui-btn-raised" onclick="" mdui-dialog="{target: '#updatesdia',modal:'true',closeOnEsc:'false'}" disabled>通过爬虫更新eAIP</botton>
+    <botton class="mdui-btn mdui-btn-raised" onclick="" mdui-dialog="{target: '#updatelocal',modal:'true',closeOnEsc:'false'}" disabled>从本地加载eAIP</botton>
+    </div><br><br>
+    <div class="mdui-card-primary-title mdui-text-center" id="SINOloadtitle">在线加载</div>
+    <div class="mdui-textfield">
+        <i class="mdui-icon material-icons">search</i>
+        <input class="mdui-textfield-input" type="text" placeholder="根据ICAO向SINO云课堂查询" id="icaosino" />
+    </div>
+    <div class="mdui-text-center">
+        <botton class="mdui-btn mdui-btn-raised" onclick="sinowiki()">查询</botton>
+        </div><br><br>
+    <div class="mdui-table-fluid">
+    <div id="contable"></div>
+    </div>
     <div id="eaipk">
         <div class="mdui-dialog" id="updatesdia">
-            <div class="mdui-dialog-title">更新eAIP</div>
-            <div class="mdui-dialog-content" id="updates">正在联系本地NodeJS服务器...</div>
-            <div class="mdui-dialog-actions" onclick="cancleupdate()"><button class="mdui-btn mdui-ripple" mdui-dialog-cancel>关闭</button></div>
+            <div class="mdui-dialog-title">通过爬虫更新eAIP</div>
+            <div class="mdui-dialog-content" id="updates">该功能尚有问题，将在后续版本修复或抛弃。</div>
+            <div class="mdui-dialog-actions" onclick="stopeaipcheck()"><button class="mdui-btn mdui-ripple" mdui-dialog-cancel>关闭</button></div>
           </div>
+          <div class="mdui-dialog" id="updatelocal">
+            <div class="mdui-dialog-title">通过本地加载eAIP</div>
+            <div class="mdui-dialog-content" id="updateslocal">正在开发中...</div>
+            <div class="mdui-dialog-actions" onclick=""><button class="mdui-btn mdui-ripple" mdui-dialog-cancel>关闭</button></div>
+          </div>
+    </div>
+    </div>
+    <div id="sinoshow" class="remove"></div>
+    <div class="mdui-card-content remove" id="pdfbotton">
+        <button onclick="removesinoshow()" class="mdui-btn mdui-btn-raised">Close</button>
+        <button onclick="full()" class="mdui-btn mdui-btn-raised">Fullscreen</button>
+        <br><br>
     </div>
 </div>

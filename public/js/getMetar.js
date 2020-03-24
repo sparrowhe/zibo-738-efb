@@ -1,4 +1,5 @@
-function getMetar(icao) {
+function getMetar() {
+    var icao = document.getElementById('icao').value;
     $.ajax({
         type: "GET",
         url: "/getmater?icao=" + icao,

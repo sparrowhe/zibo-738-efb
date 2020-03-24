@@ -63,7 +63,7 @@ function upd(n) {
     html = $("#2").html();
     $.ajax({
         url: "/downloadpdf",
-        data: {url:turl},
+        data: {url:turl,special:"ENR_ERC" + n + ".pdf"},
         type: "GET",
         success: function(result){ 
             var dete = JSON.parse(JSON.stringify(result));
@@ -104,22 +104,89 @@ function eaip() {
     })
 }
 
+function startcheckin(){
+eaipc = setInterval(function(){ startcheck() }, 500);
+}
+
+function stopeaipcheck() {
+    clearInterval(eaipc);
+}
+function startcheck(){
+    $.ajax({
+        url: "/updatestatus",
+        type: "GET",
+        success: function(result){ 
+                var dete2 = JSON.parse(JSON.stringify(result));
+                var tede2 = dete2['message'];
+                $("#updates").replaceWith('<div class="mdui-dialog-content" id="updates">'+tede2+'</div>')
+                if (tede2=='已完成eAIP更新') {
+                    stopeaipcheck();
+                  }
+        }
+    })
+}
 function updateeaip(){
     $.ajax({
         url: "/eaipget",
         data: {command:"update"},
         type: "GET",
         success: function(result){ 
-            if (lastm==result) {
-            } else {
-                lastm = result;
-                var dete2 = JSON.parse(JSON.stringify(result));
-                var tede2 = dete2['message'];
-                $("#updates").append('<div class="mdui-dialog-content" id="updates">'+tede2+'</div>')
-                if (tede2=='done') {
-                    clearInterval(idxx);
-                  }
-            }
+            startcheckin();
         }
     })
     }
+
+function jump(){
+        window.location.href="https://wiki.sinofsx.com/index.php?title=%E8%88%AA%E8%A1%8C%E8%B5%84%E6%96%99";
+       }
+
+       
+function full(){
+    window.location.href=targeturl;
+   }
+
+ function sinowiki(){
+    var icao = document.getElementById('icaosino').value;
+ //   $('#sinoform').html(' ');
+        $.ajax({
+            url: "/sinowiki",
+            data: {target:icao},
+            type: "GET",
+            success: function(result){ 
+                var dete2 = JSON.parse(JSON.stringify(result));
+                var tede2 = dete2['message'];
+                tede2 = tede2.replace(/<a/g,'<botton')
+                tede2 = tede2.replace(/<\/a>/g,'</botton>')
+                tede2 = tede2.replace(/href="/g,'onclick="sinoshow(\'')
+                tede2 = tede2.replace(/\.pdf"/g,'.pdf\')"')
+                $('#contable').html(tede2);
+            }
+        })
+        }
+
+        function sinoshow(n) {
+            removesinoshow()
+            turl = n;
+            targeturl = "pdfjs/web/viewer.html?file=../files/temp.pdf";
+            $.ajax({
+                url: "/downloadpdf",
+                data: {url:turl,special:'temp'},
+                type: "GET",
+                success: function(result){ 
+                    var dete = JSON.parse(JSON.stringify(result));
+                    var tede = dete['message'];
+                    if(tede=="ok"){
+                    console.log(result);
+                    $("#sinoshow").html('<object id="sinoshow" style="height:100%;width:100%;" data="' + targeturl + '">' + '</object>');
+                    $("#main").addClass("remove");
+                    $("#sinoshow").removeClass("remove");
+                    $("#pdfbotton").removeClass("remove");
+                }}
+            })
+        }
+
+function removesinoshow() {
+    $("#sinoshow").html('<div id="sinoshow" class="remove"></div>');
+    $("#main").removeClass("remove");
+    $("#pdfbotton").addClass("remove");
+}
